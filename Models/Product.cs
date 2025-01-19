@@ -14,5 +14,9 @@
         /// ürün fiyati
         /// </summary>
         public decimal Price { get; set; }
+        /// <summary>
+        /// ürün aciklamasi
+        /// </summary>
+        public string Description { get; set; }
     }
 }
