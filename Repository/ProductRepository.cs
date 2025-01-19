@@ -1,4 +1,5 @@
-﻿using Product_Project_Api.DataContext;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Product_Project_Api.DataContext;
 using Product_Project_Api.Models;
 
 namespace Product_Project_Api.Repository
@@ -26,5 +27,27 @@ namespace Product_Project_Api.Repository
             await _appDbContext.SaveChangesAsync();
             return product.ProductName;
         }
+        /// <summary>
+        /// ürün silmek için kullanıdıgımız fonksiyon
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<bool> DeleteProduct(int id)
+        {
+            var product = await _appDbContext.Products.FindAsync(id);
+            if (product != null)
+            {
+                _appDbContext.Products.Remove(product);
+                await _appDbContext.SaveChangesAsync();
+                return true;
+            }
+
+            else
+            {
+                throw new Exception("ürün bulunamadı");
+            }
+        }
+
     }
 }

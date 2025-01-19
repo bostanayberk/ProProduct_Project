@@ -27,5 +27,26 @@ namespace Product_Project_Api.Controllers
 
         }
 
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteEmployee(int id)
+        {
+            if (id == null)
+                return BadRequest();
+            else
+            {
+                var deleteProduct = await _productRepository.DeleteProduct(id);
+
+                if (deleteProduct == true)
+                    return Ok(new { Message = "ürün silindi" });
+
+                else
+                    return BadRequest("bir hata meydana geldi");
+
+            }
+
+
+        }
+
     }
 }
