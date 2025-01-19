@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Product_Project_Api.DataContext;
+using Product_Project_Api.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
+builder.Services.AddScoped<ProductRepository>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
