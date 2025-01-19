@@ -49,5 +49,37 @@ namespace Product_Project_Api.Repository
             }
         }
 
+        /// <summary>
+        /// ürün id sine göre ürünü  veritabanından alıp günceller
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public async Task UpdateProduct(Product product)
+        {
+            var dbProduct = await _appDbContext.Products.FindAsync(product.Id);
+            if (dbProduct != null)
+            {
+                dbProduct.ProductName = product.ProductName;
+                dbProduct.Price = product.Price;
+                dbProduct.Description = product.Description;
+
+                await _appDbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("ürün bulunamadı");
+            }
+        }
+
+        /// <summary>
+        /// id ye gore ürünleri veritabanından ürünü getirir
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<Product> GetProductById(int id)
+        {
+            return await _appDbContext.Products.FindAsync(id);
+        }
+
     }
 }

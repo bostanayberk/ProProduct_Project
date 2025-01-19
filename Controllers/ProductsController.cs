@@ -29,7 +29,7 @@ namespace Product_Project_Api.Controllers
 
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteEmployee(int id)
+        public async Task<ActionResult> DeleteProduct(int id)
         {
             if (id == null)
                 return BadRequest();
@@ -47,6 +47,21 @@ namespace Product_Project_Api.Controllers
 
 
         }
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateProduct(int id, Product product)
+        {
+            if (id == null)
+                return BadRequest();
 
+            var dbProduct = await _productRepository.GetProductById(id);
+
+            if (dbProduct == null)
+            {
+                return NotFound(new { Message = "ürün bulunamadi" });
+            }
+
+            await _productRepository.UpdateProduct(product);
+            return Ok(new { Message = "ürün güncellendi" });
+        }
     }
 }
