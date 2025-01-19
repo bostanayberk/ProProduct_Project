@@ -63,5 +63,17 @@ namespace Product_Project_Api.Controllers
             await _productRepository.UpdateProduct(product);
             return Ok(new { Message = "ürün güncellendi" });
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetProductById(int id)
+        {
+            var product = await _productRepository.GetProductById(id);
+            if (product == null)
+            {
+                return NotFound(new { Message = "ürün bulunamadi" });
+            }
+
+            return Ok(product);
+        }
     }
 }
