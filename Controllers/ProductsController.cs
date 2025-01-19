@@ -75,5 +75,18 @@ namespace Product_Project_Api.Controllers
 
             return Ok(product);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetProducts()
+        {
+            var products = await _productRepository.GetProducts();
+
+            if (products == null)
+            {
+                return NotFound(new { Message = "ürün bulunamadi" });
+
+            }
+            return Ok(products);
+        }
     }
 }

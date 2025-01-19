@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using Product_Project_Api.DataContext;
 using Product_Project_Api.Models;
 
@@ -80,6 +81,16 @@ namespace Product_Project_Api.Repository
         {
             return await _appDbContext.Products.FindAsync(id);
         }
+        /// <summary>
+        /// ürün listesini getirir
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Product>> GetProducts()
+        {
+            var productLists = await _appDbContext.Products.ToListAsync();
+            return productLists;
+        }
+
 
     }
 }
