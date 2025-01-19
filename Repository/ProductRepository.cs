@@ -20,10 +20,11 @@ namespace Product_Project_Api.Repository
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public async Task AddProduct(Product product)
+        public async Task<string> AddProduct(Product product)
         {
             await _appDbContext.Products.AddAsync(product);
             await _appDbContext.SaveChangesAsync();
+            return product.ProductName;
         }
     }
 }
